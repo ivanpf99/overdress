@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.elorrieta.overdress.modelo.Carta;
+import com.elorrieta.overdress.modelo.dao.CartaDAO;
+
 /**
  * Servlet implementation class ParticipantesEditar
  */
@@ -54,7 +57,7 @@ public class CartasEditar extends HttpServlet {
 		int grado = Integer.parseInt(request.getParameter("grado"));
 		int copias = Integer.parseInt(request.getParameter("copias"));
 
-		// creamos POJO de Participante con los datos del formulario
+		// creamos POJO de Carta con los datos del formulario
 		Carta c = new Carta();
 		c.setId(id);
 		c.setNumero_id(numero_id);

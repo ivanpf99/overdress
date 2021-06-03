@@ -1,6 +1,7 @@
 package com.elorrieta.overdress.controladores.Backoffice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.elorrieta.overdress.modelo.dao.CartaDAO;
+import com.elorrieta.overdress.modelo.Usuario;
+import com.elorrieta.overdress.modelo.dao.UsuarioDAO;
 
 /**
- * Servlet implementation class ParticpantesEliminarController
+ * Servlet implementation class ParticipantesController
  */
-@WebServlet("/particpantes-eliminar")
-public class CartasEliminarController extends HttpServlet {
+@WebServlet("/usuario")
+public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -24,20 +26,17 @@ public class CartasEliminarController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int id = Integer.parseInt(request.getParameter("id"));
+		// recoger parametros, no tenemos
 
-		try {
-			CartaDAO.delete(id);
+		// logica de negocio, conseguir coleccion de Participantes
 
-			request.setAttribute("mensajeTipo", "warning");
-			request.setAttribute("mensaje", "Carta eliminada");
-		} catch (Exception e) {
-			request.setAttribute("mensajeTipo", "danger");
-			request.setAttribute("mensaje", "No se puede Eliminar");
-			e.printStackTrace();
-		}
+		ArrayList<Usuario> usuarios = UsuarioDAO.getAll();
 
-		request.getRequestDispatcher("participantes-listar").forward(request, response);
+		// enviar atributos para pintar
+		request.setAttribute("usuarios", usuarios);
+
+		// ir a la vista
+		request.getRequestDispatcher("usuarios.jsp?page=usuarios").forward(request, response);
 
 	}
 
@@ -50,5 +49,4 @@ public class CartasEliminarController extends HttpServlet {
 
 		doGet(request, response);
 	}
-
 }
