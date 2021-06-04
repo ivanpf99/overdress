@@ -28,9 +28,12 @@ public class CartaDAO {
 	public static ArrayList<Carta> getAll() {
 
 		ArrayList<Carta> lista = new ArrayList<Carta>();
-		String sql = " SELECT cartas.id, cartas.nombre, numero_id, cartas.id_coleccion as 'coleccion', coleccion.id as 'id_coleccion', copias  \r\n"
-				+ " " + "FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
-				+ "ORDER BY cartas.id ASC; ";
+		String sql = "SELECT \r\n"
+				+ "cartas.id, cartas.nombre, numero_id, coleccion.nombre as 'coleccion', tipo.nombre as 'tipo', grado.nombre as 'grado', cartas.copias\r\n"
+				+ "				 FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
+				+ "				 LEFT JOIN tipo ON cartas.id_tipo = tipo.id \r\n"
+				+ "				 INNER JOIN grado ON cartas.id_grado = grado.id \r\n"
+				+ "				 ORDER BY cartas.id ASC;";
 
 		System.out.println(sql);
 		try (
@@ -53,12 +56,10 @@ public class CartaDAO {
 				String colColeccion = rs.getString("coleccion");
 				int colColeccionId = rs.getInt("id_coleccion");
 
-				/*
-				 * String colTipo = rs.getString("tipo"); int colTipoId = rs.getInt("id_tipo");
-				 * String colGrado = rs.getString("grado"); int colGradoId =
-				 * rs.getInt("id_grado");
-				 * 
-				 */
+				String colTipo = rs.getString("tipo");
+				int colTipoId = rs.getInt("id_tipo");
+				String colGrado = rs.getString("grado");
+				int colGradoId = rs.getInt("id_grado");
 
 				int colCopias = rs.getInt("copias");
 
@@ -72,14 +73,15 @@ public class CartaDAO {
 				coleccion.setNombre(colColeccion);
 				c.setColeccion(coleccion);
 
-				/*
-				 * Tipo tipo = new Tipo(); tipo.setId(colTipoId); tipo.setNombre(colTipo);
-				 * c.setTipo(tipo);
-				 * 
-				 * Grado grado = new Grado(); grado.setId(colGradoId);
-				 * grado.setNombre(colGrado); c.setGrado(grado);
-				 * 
-				 */
+				Tipo tipo = new Tipo();
+				tipo.setId(colTipoId);
+				tipo.setNombre(colTipo);
+				c.setTipo(tipo);
+
+				Grado grado = new Grado();
+				grado.setId(colGradoId);
+				grado.setNombre(colGrado);
+				c.setGrado(grado);
 
 				// a�adir objeto al ArrayList
 				lista.add(c);

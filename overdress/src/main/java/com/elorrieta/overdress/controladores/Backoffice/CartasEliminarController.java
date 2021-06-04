@@ -13,7 +13,7 @@ import com.elorrieta.overdress.modelo.dao.CartaDAO;
 /**
  * Servlet implementation class ParticpantesEliminarController
  */
-@WebServlet("/particpantes-eliminar")
+@WebServlet("/cartas-eliminar")
 public class CartasEliminarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
