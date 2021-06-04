@@ -28,9 +28,11 @@ public class CartaDAO {
 	public static ArrayList<Carta> getAll() {
 
 		ArrayList<Carta> lista = new ArrayList<Carta>();
-		String sql = " SELECT carta.id, carta.nombre, numero_id, carta.coleccion as 'coleccion', coleccion.id as 'id_coleccion' "
-				+ " FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id ORDER BY carta.id ASC; ";
+		String sql = " SELECT cartas.id, cartas.nombre, numero_id, cartas.id_coleccion as 'coleccion', coleccion.id as 'id_coleccion', copias  \r\n"
+				+ " " + "FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
+				+ "ORDER BY cartas.id ASC; ";
 
+		System.out.println(sql);
 		try (
 
 				Connection con = ConnectionHelper.getConnection();
@@ -50,11 +52,15 @@ public class CartaDAO {
 				String colNombre = rs.getString("nombre");
 				String colColeccion = rs.getString("coleccion");
 				int colColeccionId = rs.getInt("id_coleccion");
-				String colTipo = rs.getString("tipo");
-				int colTipoId = rs.getInt("id_tipo");
-				String colGrado = rs.getString("grado");
-				int colGradoId = rs.getInt("id_grado");
-				int colCopias = rs.getInt("id_copias");
+
+				/*
+				 * String colTipo = rs.getString("tipo"); int colTipoId = rs.getInt("id_tipo");
+				 * String colGrado = rs.getString("grado"); int colGradoId =
+				 * rs.getInt("id_grado");
+				 * 
+				 */
+
+				int colCopias = rs.getInt("copias");
 
 				c.setId(colId);
 				c.setNumero_id(colNumero_id);
@@ -66,17 +72,16 @@ public class CartaDAO {
 				coleccion.setNombre(colColeccion);
 				c.setColeccion(coleccion);
 
-				Tipo tipo = new Tipo();
-				tipo.setId(colTipoId);
-				tipo.setNombre(colTipo);
-				c.setTipo(tipo);
+				/*
+				 * Tipo tipo = new Tipo(); tipo.setId(colTipoId); tipo.setNombre(colTipo);
+				 * c.setTipo(tipo);
+				 * 
+				 * Grado grado = new Grado(); grado.setId(colGradoId);
+				 * grado.setNombre(colGrado); c.setGrado(grado);
+				 * 
+				 */
 
-				Grado grado = new Grado();
-				grado.setId(colGradoId);
-				grado.setNombre(colGrado);
-				c.setGrado(grado);
-
-				// añadir objeto al ArrayList
+				// aï¿½adir objeto al ArrayList
 				lista.add(c);
 
 			}
@@ -104,7 +109,7 @@ public class CartaDAO {
 			// sustituir ? por valores del cNuevo
 			pst.setString(1, cNuevo.getNumero_id());
 			pst.setString(2, cNuevo.getNombre());
-			pst.setint(3, cNuevo.getColeccion().getId());
+			pst.setInt(3, cNuevo.getColeccion().getId());
 			pst.setInt(4, cNuevo.getTipo().getId());
 			pst.setInt(5, cNuevo.getGrado().getId());
 			pst.setInt(6, cNuevo.getCopias());
@@ -156,7 +161,7 @@ public class CartaDAO {
 
 			pst.setString(1, c.getNumero_id());
 			pst.setString(2, c.getNombre());
-			pst.setint(3, c.getColeccion().getId());
+			pst.setInt(3, c.getColeccion().getId());
 			pst.setInt(4, c.getTipo().getId());
 			pst.setInt(5, c.getGrado().getId());
 			pst.setInt(6, c.getCopias());

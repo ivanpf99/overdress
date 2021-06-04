@@ -5,9 +5,9 @@ public class Carta {
 	private int id;
 	private String numero_id;
 	private String nombre;
-	private String coleccion;
-	private String tipo;
-	private int grado;
+	private Coleccion coleccion;
+	private Tipo tipo;
+	private Grado grado;
 	private int copias;
 
 	public Carta() {
@@ -15,9 +15,9 @@ public class Carta {
 		this.id = 0;
 		this.numero_id = "";
 		this.nombre = "";
-		this.coleccion = "";
-		this.tipo = "";
-		this.grado = 0;
+		this.coleccion = new Coleccion();
+		this.tipo = new Tipo();
+		this.grado = new Grado();
 		this.copias = 0;
 	}
 
@@ -45,36 +45,36 @@ public class Carta {
 		this.nombre = nombre;
 	}
 
-	public String getColeccion() {
-		return coleccion;
-	}
-
-	public void setColeccion(String coleccion) {
-		this.coleccion = coleccion;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public int getGrado() {
-		return grado;
-	}
-
-	public void setGrado(int grado) {
-		this.grado = grado;
-	}
-
 	public int getCopias() {
 		return copias;
 	}
 
 	public void setCopias(int copias) {
 		this.copias = copias;
+	}
+
+	public Coleccion getColeccion() {
+		return coleccion;
+	}
+
+	public void setColeccion(Coleccion coleccion) {
+		this.coleccion = coleccion;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Grado getGrado() {
+		return grado;
+	}
+
+	public void setGrado(Grado grado) {
+		this.grado = grado;
 	}
 
 	@Override
