@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.elorrieta.overdress.modelo.Usuario;
 import com.elorrieta.overdress.modelo.dao.UsuarioDAO;
@@ -48,16 +49,22 @@ public class LoginController extends HttpServlet {
 			mensaje = "Ongi Etorri";
 			vista = "cartas-listar"; // nombre del controlador, no quiero ir a la JSP
 
+			// guardar el usuario en session para el filtro
+			HttpSession session = request.getSession();
+			session.setAttribute("usuario_logeado", usuario);
+
 		} else {
 			mensaje = "Credenciales incorrectas, prueba de nuevo";
-			vista = "index.jsp?page=login";
+			vista = "login.jsp?page=login";
 		}
 
 		// enviar atributos para vistar
 		request.setAttribute("mensaje", mensaje);
 
 		// Ir a una vista
-		request.getRequestDispatcher(vista).forward(request, response);
+		// request.getRequestDispatcher(vista).forward(request, response);
+
+		response.sendRedirect(request.getContextPath() + "/" + vista);
 
 	}
 }

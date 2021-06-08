@@ -8,12 +8,12 @@
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
-	      <th scope="col">Numero_id</th>
 	      <th scope="col">Nombre</th>
+	      <th scope="col">Numero_id</th>
 	      <th scope="col">Coleccion</th>
 	      <th scope="col">Tipo</th>
 	      <th scope="col">Grado</th>
-	      <th scope="col">Copiasth>
+	      <th scope="col">Copias</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -21,11 +21,12 @@
 	          <tr>
 	            <th scope="row">${carta.id}</th>
 	            <td>${carta.nombre}</td>
+	            <td>${carta.numero_id}</td>
 	            <td>${carta.coleccion.nombre}</td>
-	            <td></td>
-	            <td></td>
-	            <td></td>
-	            <td></td>
+	            <td>${carta.tipo.nombre}</td>
+	            <td>${carta.grado.nombre}</td>
+	            <td>${carta.copias}</td>
+	            
 	          </tr>
 	      </c:forEach>
 	   

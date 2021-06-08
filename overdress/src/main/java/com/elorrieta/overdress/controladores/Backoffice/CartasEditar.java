@@ -17,7 +17,7 @@ import com.elorrieta.overdress.modelo.dao.CartaDAO;
 /**
  * Servlet implementation class ParticipantesEditar
  */
-@WebServlet("/cartas-editar")
+@WebServlet("/backoffice/cartas-editar")
 public class CartasEditar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

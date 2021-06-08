@@ -4,6 +4,8 @@
 <jsp:include page="../plantillas/cabecera.jsp"/>
 <jsp:include page="../plantillas/menu.jsp"/>
 
+
+
  <main class="container">
     <h1>Listado Cartas</h1>
     <a href="backoffice/cartas-editar?id=0">Nueva carta</a>
@@ -27,7 +29,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Numero_idr</th>
+            <th scope="col">Numero_id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Coleccion</th>
             <th scope="col">Tipo</th>
@@ -52,10 +54,12 @@
 	            <th scope="row">${cIteracion.id}</th>
 	            <td>${cIteracion.numero_id}</td>
 	            <td>${cIteracion.nombre}</td>
-	            <td>${cIteracion.coleccion}</td>
-	            <td>${cIteracion.tipo}</td>
-	            <td>${cIteracion.grado}</td>
+	            <td>${cIteracion.coleccion.nombre}</td>
+	            <td>${cIteracion.tipo.nombre}</td>
+	            <td>${cIteracion.grado.nombre}</td>
 	            <td>${cIteracion.copias}</td>
+	            <td><a href="backoffice/cartas-editar?id=${cIteracion.id}" class="btn btn-outline-primary">Editar</a></td>
+	            <td><a onclick="confirmarEliminacion('${cIteracion.nombre}')" class="btn btn-outline-danger" href="backoffice/cartas-eliminar?id=${cIteracion.id}">Eliminar</a></td>
 	          </tr>
 	         </c:forEach> 
 	         

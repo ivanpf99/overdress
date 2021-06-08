@@ -27,13 +27,13 @@
         
         -->
         
-        <c:forEach var="uIteracion" items="${usuarios}">
+        <c:forEach var="usuario" items="${usuarios}">
 	          <tr>
 	            <th scope="row">${uIteracion.id}</th>
-	            <td>${uIteracion.id}</td>
-	            <td>${uIteracion.nombre}</td>
-	            <td>${uIteracion.pass}</td>
-	            <td>${uIteracion.rol}</td>
+	            <td>${usuario.id}</td>
+	            <td>${usuario.nombre}</td>
+	            <td>${usuario.pass}</td>
+	            <td>${usuario.rol}</td>
 	          </tr>
 	         </c:forEach> 
 	         <!-- terminamos de recorrer -->

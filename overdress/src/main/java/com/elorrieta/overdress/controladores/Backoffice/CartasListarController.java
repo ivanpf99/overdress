@@ -20,8 +20,6 @@ import com.elorrieta.overdress.modelo.dao.CartaDAO;
 public class CartasListarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// 1000 usuarios de prueba for
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -30,10 +28,10 @@ public class CartasListarController extends HttpServlet {
 		ArrayList<Carta> lista = CartaDAO.getAll();
 
 		// enviar atributos para pintar
-		request.setAttribute("Cartas", lista);
+		request.setAttribute("cartas", lista);
 
 		// ir a la vista
-		request.getRequestDispatcher("backoffice/Cartas.jsp?page=participantes").forward(request, response);
+		request.getRequestDispatcher("backoffice/cartas.jsp?page=cartas").forward(request, response);
 
 	}
 

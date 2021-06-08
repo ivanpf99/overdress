@@ -13,7 +13,7 @@
        <c:if test="${usuario_logeado == null }">
 	         <li class="nav-item">
 	           <a class="nav-link ${ (param.page eq 'login') ? 'active' : '' }" 
-	              href="index.jsp?page=login">Login</a>
+	              href="login.jsp?page=login">Login</a>
 	         </li>
          </c:if>
          
@@ -28,8 +28,8 @@
           <!-- visible solo para ADMINISTRADORES -->
          <c:if test="${usuario_logeado.rol == 2 }">
 	         <li class="nav-item">
-	           <a class="nav-link ${ (param.page eq 'participantes') ? 'active' : '' }" 
-	              href="backoffice/participantes-listar">Cartas</a>
+	           <a class="nav-link ${ (param.page eq 'cartas') ? 'active' : '' }" 
+	              href="backoffice/cartas-listar">Cartas</a>
 	         </li>
 	         <li class="nav-item">
 	           <a class="nav-link ${ (param.page eq 'formulario') ? 'active' : '' }" 
