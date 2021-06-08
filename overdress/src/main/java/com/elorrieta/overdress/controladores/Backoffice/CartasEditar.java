@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.elorrieta.overdress.modelo.Carta;
+import com.elorrieta.overdress.modelo.Coleccion;
+import com.elorrieta.overdress.modelo.Grado;
+import com.elorrieta.overdress.modelo.Tipo;
 import com.elorrieta.overdress.modelo.dao.CartaDAO;
 
 /**
@@ -52,9 +55,9 @@ public class CartasEditar extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String numero_id = request.getParameter("numero_id");
 		String nombre = request.getParameter("nombre");
-		String coleccion = request.getParameter("coleccion");
-		String tipo = request.getParameter("tipo");
-		int grado = Integer.parseInt(request.getParameter("grado"));
+		int idcoleccion = Integer.parseInt("idcoleccion");
+		int idtipo = Integer.parseInt("idtipo");
+		int idgrado = Integer.parseInt(request.getParameter("idgrado"));
 		int copias = Integer.parseInt(request.getParameter("copias"));
 
 		// creamos POJO de Carta con los datos del formulario
@@ -62,9 +65,20 @@ public class CartasEditar extends HttpServlet {
 		c.setId(id);
 		c.setNumero_id(numero_id);
 		c.setNombre(nombre);
-		c.setColeccion(coleccion);
+
+		// Coleccion
+		Coleccion cole = new Coleccion();
+		cole.setId(idcoleccion);
+		c.setColeccion(cole);
+
+		Tipo tipo = new Tipo();
+		tipo.setId(idtipo);
 		c.setTipo(tipo);
+
+		Grado grado = new Grado();
+		grado.setId(idgrado);
 		c.setGrado(grado);
+
 		c.setCopias(copias);
 
 		try {

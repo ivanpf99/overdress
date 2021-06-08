@@ -29,7 +29,7 @@ public class CartaDAO {
 
 		ArrayList<Carta> lista = new ArrayList<Carta>();
 		String sql = "SELECT \r\n"
-				+ "cartas.id, cartas.nombre, numero_id, coleccion.nombre as 'coleccion', tipo.nombre as 'tipo', grado.nombre as 'grado', cartas.copias\r\n"
+				+ " cartas.id, cartas.nombre, numero_id, coleccion.nombre as 'coleccion', coleccion.id as id_coleccion, tipo.nombre as 'tipo', tipo.id as id_tipo, grado.nombre as 'grado', grado.id as id_grado, cartas.copias \r\n"
 				+ "				 FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
 				+ "				 LEFT JOIN tipo ON cartas.id_tipo = tipo.id \r\n"
 				+ "				 INNER JOIN grado ON cartas.id_grado = grado.id \r\n"
@@ -51,8 +51,8 @@ public class CartaDAO {
 
 				// cogemos los valres de las columnas
 				int colId = rs.getInt("id");
-				String colNumero_id = rs.getString("numero_id");
 				String colNombre = rs.getString("nombre");
+				String colNumero_id = rs.getString("numero_id");
 				String colColeccion = rs.getString("coleccion");
 				int colColeccionId = rs.getInt("id_coleccion");
 
