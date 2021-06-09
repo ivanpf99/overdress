@@ -13,6 +13,8 @@ import com.elorrieta.overdress.modelo.Coleccion;
 import com.elorrieta.overdress.modelo.Grado;
 import com.elorrieta.overdress.modelo.Tipo;
 import com.elorrieta.overdress.modelo.dao.CartaDAO;
+import com.elorrieta.overdress.modelo.dao.ColeccionDAO;
+import com.elorrieta.overdress.modelo.dao.GradoDAO;
 import com.elorrieta.overdress.modelo.dao.TipoDAO;
 
 /**
@@ -41,6 +43,8 @@ public class CartasEditar extends HttpServlet {
 
 		request.setAttribute("titulo", titulo);
 		request.setAttribute("tipos", TipoDAO.getAll());
+		request.setAttribute("colecciones", ColeccionDAO.getAll());
+		request.setAttribute("grados", GradoDAO.getAll());
 		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
@@ -102,6 +106,8 @@ public class CartasEditar extends HttpServlet {
 
 		request.setAttribute("titulo", "Modificar Carta");
 		request.setAttribute("tipos", TipoDAO.getAll());
+		request.setAttribute("colecciones", ColeccionDAO.getAll());
+		request.setAttribute("grados", GradoDAO.getAll());
 		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);

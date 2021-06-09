@@ -3,6 +3,7 @@ package com.elorrieta.overdress.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.elorrieta.overdress.modelo.Carta;
@@ -19,6 +20,12 @@ import com.elorrieta.overdress.modelo.Tipo;
 
 public class CartaDAO {
 
+	private static final String SQL_JOIN = "SELECT \r\n"
+			+ " cartas.id, cartas.nombre, numero_id, coleccion.nombre as 'coleccion', coleccion.id as id_coleccion, tipo.nombre as 'tipo', tipo.id as id_tipo, grado.nombre as 'grado', grado.id as id_grado, cartas.copias \r\n"
+			+ "				 FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
+			+ "				 LEFT JOIN tipo ON cartas.id_tipo = tipo.id \r\n"
+			+ "				 INNER JOIN grado ON cartas.id_grado = grado.id \r\n";
+
 	/**
 	 * Consulta la tabla 'carta' para recuperar todos y devolverlos en una coleccion
 	 * 
@@ -28,12 +35,7 @@ public class CartaDAO {
 	public static ArrayList<Carta> getAll() {
 
 		ArrayList<Carta> lista = new ArrayList<Carta>();
-		String sql = "SELECT \r\n"
-				+ " cartas.id, cartas.nombre, numero_id, coleccion.nombre as 'coleccion', coleccion.id as id_coleccion, tipo.nombre as 'tipo', tipo.id as id_tipo, grado.nombre as 'grado', grado.id as id_grado, cartas.copias \r\n"
-				+ "				 FROM cartas INNER JOIN coleccion ON cartas.id_coleccion = coleccion.id \r\n"
-				+ "				 LEFT JOIN tipo ON cartas.id_tipo = tipo.id \r\n"
-				+ "				 INNER JOIN grado ON cartas.id_grado = grado.id \r\n"
-				+ "				 ORDER BY cartas.id ASC;";
+		String sql = SQL_JOIN + " ORDER BY cartas.nombre ASC;";
 
 		System.out.println(sql);
 		try (
@@ -46,43 +48,7 @@ public class CartaDAO {
 
 			while (rs.next()) { // itero sobre los resultados de la consulta SQL
 
-				// creamos un nuevo Objeto y lo seteamos con los valores del RS
-				Carta c = new Carta();
-
-				// cogemos los valres de las columnas
-				int colId = rs.getInt("id");
-				String colNombre = rs.getString("nombre");
-				String colNumero_id = rs.getString("numero_id");
-				String colColeccion = rs.getString("coleccion");
-				int colColeccionId = rs.getInt("id_coleccion");
-
-				String colTipo = rs.getString("tipo");
-				int colTipoId = rs.getInt("id_tipo");
-				String colGrado = rs.getString("grado");
-				int colGradoId = rs.getInt("id_grado");
-
-				int colCopias = rs.getInt("copias");
-
-				c.setId(colId);
-				c.setNumero_id(colNumero_id);
-				c.setNombre(colNombre);
-				c.setCopias(colCopias);
-
-				Coleccion coleccion = new Coleccion();
-				coleccion.setId(colColeccionId);
-				coleccion.setNombre(colColeccion);
-				c.setColeccion(coleccion);
-
-				Tipo tipo = new Tipo();
-				tipo.setId(colTipoId);
-				tipo.setNombre(colTipo);
-				c.setTipo(tipo);
-
-				Grado grado = new Grado();
-				grado.setId(colGradoId);
-				grado.setNombre(colGrado);
-				c.setGrado(grado);
-
+				Carta c = mapper(rs);
 				// a�adir objeto al ArrayList
 				lista.add(c);
 
@@ -181,7 +147,7 @@ public class CartaDAO {
 	}
 
 	/**
-	 * Buscamos un participante por su identificador
+	 * Buscamos Una carta por su identificador
 	 * 
 	 * @param id int identificador del participantes
 	 * @return Participante con datos si encuentra, NULL si no lo encuentra
@@ -189,8 +155,7 @@ public class CartaDAO {
 	public static Carta getById(int id) {
 
 		Carta c = new Carta();
-		// TODO INNER JOIN
-		String sql = "SELECT id, numero_id, nombre, id_coleccion , id_tipo, id_grado, copias FROM cartas WHERE id = ?; ";
+		String sql = SQL_JOIN + " WHERE id = ?; ";
 
 		try (Connection con = ConnectionHelper.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -199,37 +164,7 @@ public class CartaDAO {
 
 				while (rs.next()) { // hemos encontrado Participante por su ID
 
-					// cogemos los valres de las columnas
-					int colId = rs.getInt("id");
-					String colNumero_id = rs.getString("numero_id");
-					String colNombre = rs.getString("nombre");
-					String colColeccion = "TODO";// rs.getString("coleccion");
-					int colColeccionId = rs.getInt("id_coleccion");
-					String colTipo = "TODO";// rs.getString("tipo");
-					int colTipoId = rs.getInt("id_tipo");
-					String colGrado = "TODO";// rs.getString("grado");
-					int colGradoId = rs.getInt("id_grado");
-					int colCopias = rs.getInt("copias");
-
-					c.setId(colId);
-					c.setNumero_id(colNumero_id);
-					c.setNombre(colNombre);
-					c.setCopias(colCopias);
-
-					Coleccion coleccion = new Coleccion();
-					coleccion.setId(colColeccionId);
-					coleccion.setNombre(colColeccion);
-					c.setColeccion(coleccion);
-
-					Tipo tipo = new Tipo();
-					tipo.setId(colTipoId);
-					tipo.setNombre(colTipo);
-					c.setTipo(tipo);
-
-					Grado grado = new Grado();
-					grado.setId(colGradoId);
-					grado.setNombre(colGrado);
-					c.setGrado(grado);
+					c = mapper(rs);
 				}
 
 			}
@@ -239,4 +174,46 @@ public class CartaDAO {
 		}
 		return c;
 	}
+
+	private static Carta mapper(ResultSet rs) throws SQLException {
+		// creamos un nuevo Objeto y lo seteamos con los valores del RS
+		Carta c = new Carta();
+
+		// cogemos los valres de las columnas
+		int colId = rs.getInt("id");
+		String colNombre = rs.getString("nombre");
+		String colNumero_id = rs.getString("numero_id");
+		String colColeccion = rs.getString("coleccion");
+		int colColeccionId = rs.getInt("id_coleccion");
+
+		String colTipo = rs.getString("tipo");
+		int colTipoId = rs.getInt("id_tipo");
+		String colGrado = rs.getString("grado");
+		int colGradoId = rs.getInt("id_grado");
+
+		int colCopias = rs.getInt("copias");
+
+		c.setId(colId);
+		c.setNumero_id(colNumero_id);
+		c.setNombre(colNombre);
+		c.setCopias(colCopias);
+
+		Coleccion coleccion = new Coleccion();
+		coleccion.setId(colColeccionId);
+		coleccion.setNombre(colColeccion);
+		c.setColeccion(coleccion);
+
+		Tipo tipo = new Tipo();
+		tipo.setId(colTipoId);
+		tipo.setNombre(colTipo);
+		c.setTipo(tipo);
+
+		Grado grado = new Grado();
+		grado.setId(colGradoId);
+		grado.setNombre(colGrado);
+		c.setGrado(grado);
+
+		return c;
+	}
+
 }

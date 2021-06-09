@@ -38,18 +38,17 @@
                    class="form-control" 
                    placeholder="Nombre">
 
+            
             <label for="coleccion" class="form-label">Coleccion:</label>
-            <input type="text" 
-                    name="coleccion" 
-                    id="coleccion"
-                    value="${carta.coleccion.id}"
-                    required                      
-                    class="form-control" 
-                    placeholder="escribe la coleccion">
+            <select name="coleccion"  class="form-select">
+            	<c:forEach items="${colecciones}" var="c">
+            		<option value="${c.id}"  ${ ( c.id == carta.coleccion.id ) ? "selected" : "" }  >${c.nombre}</option>
+            	</c:forEach>
+            </select> 
 
             
             
-            TIPOID: ${carta.tipo.id}
+            
             <label for="tipo" class="form-label">Tipo:</label>
             <select name="tipo"  class="form-select">
             	<c:forEach items="${tipos}" var="t">
@@ -58,14 +57,13 @@
             </select>        
                    
                     
+            
             <label for="grado" class="form-label">Grado:</label>
-            <input type="text" 
-                    name="grado"
-                    id="grado" 
-                    value="${carta.grado.id}"
-                    required                      
-                    class="form-control" 
-                    placeholder="seleccione grado"> 
+            <select name="grado"  class="form-select">
+            	<c:forEach items="${grados}" var="g">
+            		<option value="${g.id}"  ${ ( g.id == carta.grado.id ) ? "selected" : "" }  >${g.nombre}</option>
+            	</c:forEach>
+            </select>  
                     
                     <label for="copias" class="form-label">Copias:</label>
             <input type="text" 
