@@ -37,7 +37,7 @@ public class CartasEliminarController extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		request.getRequestDispatcher("participantes-listar").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/backoffice/cartas-listar");
 
 	}
 

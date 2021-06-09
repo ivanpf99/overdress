@@ -18,7 +18,7 @@
                    readonly       
                    class="form-control">
                    
-                   <label for="numero_id" class="form-label">Numero.id:</label>
+            <label for="numero_id" class="form-label">Numero.id:</label>
             <input type="text" 
                    name="numeroId"                   
                    id="nombre"
@@ -66,7 +66,7 @@
             </select>  
                     
                     <label for="copias" class="form-label">Copias:</label>
-            <input type="text" 
+            <input type="number" 
                     name="copias"
                     id="copias" 
                     value="${carta.copias}"
@@ -75,7 +75,7 @@
                     placeholder="numero de copias">       
                           
 
-            <input type="submit" value="${ ( cartas.id == 0 ) ? 'Crear' : 'Editar' }" class="btn btn-block btn-primary mt-4">
+            <input type="submit" value="Guardar" class="btn w-100 btn-block btn-primary mt-4">
         </form>
 
 </main>  
