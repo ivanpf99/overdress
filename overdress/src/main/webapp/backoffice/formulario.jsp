@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"  %>
+
 <jsp:include page="../plantillas/cabecera.jsp"/>
 <jsp:include page="../plantillas/menu.jsp"/>
 
@@ -17,7 +20,7 @@
                    
                    <label for="numero_id" class="form-label">Numero.id:</label>
             <input type="text" 
-                   name="numero.id"                   
+                   name="numeroId"                   
                    id="nombre"
                    value="${carta.numero_id}"
                    required 
@@ -39,26 +42,27 @@
             <input type="text" 
                     name="coleccion" 
                     id="coleccion"
-                    value="${cartas.id_coleccion}"
+                    value="${carta.coleccion.id}"
                     required                      
                     class="form-control" 
                     placeholder="escribe la coleccion">
 
-                    
+            
+            
+            TIPOID: ${carta.tipo.id}
             <label for="tipo" class="form-label">Tipo:</label>
-            <input type="text" 
-                    name="tipo"
-                    id="tipo" 
-                    value="${cartas.id_tipo}"
-                    required                      
-                    class="form-control" 
-                    placeholder="seleccione tipo">
+            <select name="tipo"  class="form-select">
+            	<c:forEach items="${tipos}" var="t">
+            		<option value="${t.id}"  ${ ( t.id == carta.tipo.id ) ? "selected" : "" }  >${t.nombre}</option>
+            	</c:forEach>
+            </select>        
+                   
                     
             <label for="grado" class="form-label">Grado:</label>
             <input type="text" 
                     name="grado"
                     id="grado" 
-                    value="${cartas.id_grado}"
+                    value="${carta.grado.id}"
                     required                      
                     class="form-control" 
                     placeholder="seleccione grado"> 
@@ -67,7 +71,7 @@
             <input type="text" 
                     name="copias"
                     id="copias" 
-                    value="${cartas.copias}"
+                    value="${carta.copias}"
                     required                      
                     class="form-control" 
                     placeholder="numero de copias">       

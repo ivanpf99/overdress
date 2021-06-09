@@ -15,7 +15,7 @@ import com.elorrieta.overdress.modelo.dao.CartaDAO;
 /**
  * Servlet implementation class ParticipantesController
  */
-@WebServlet("/cartas-listar")
+@WebServlet("/backoffice/cartas-listar")
 
 public class CartasListarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class CartasListarController extends HttpServlet {
 		request.setAttribute("cartas", lista);
 
 		// ir a la vista
-		request.getRequestDispatcher("backoffice/cartas.jsp?page=cartas").forward(request, response);
+		request.getRequestDispatcher("cartas.jsp?page=cartas").forward(request, response);
 
 	}
 

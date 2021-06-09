@@ -167,6 +167,9 @@ public class CartaDAO {
 			pst.setInt(4, c.getTipo().getId());
 			pst.setInt(5, c.getGrado().getId());
 			pst.setInt(6, c.getCopias());
+			pst.setInt(7, c.getId());
+
+			System.out.println(pst);
 
 			if (pst.executeUpdate() == 1) {
 				modificado = true;
@@ -185,7 +188,8 @@ public class CartaDAO {
 	 */
 	public static Carta getById(int id) {
 
-		Carta c = null;
+		Carta c = new Carta();
+		// TODO INNER JOIN
 		String sql = "SELECT id, numero_id, nombre, id_coleccion , id_tipo, id_grado, copias FROM cartas WHERE id = ?; ";
 
 		try (Connection con = ConnectionHelper.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
@@ -199,13 +203,13 @@ public class CartaDAO {
 					int colId = rs.getInt("id");
 					String colNumero_id = rs.getString("numero_id");
 					String colNombre = rs.getString("nombre");
-					String colColeccion = rs.getString("coleccion");
+					String colColeccion = "TODO";// rs.getString("coleccion");
 					int colColeccionId = rs.getInt("id_coleccion");
-					String colTipo = rs.getString("tipo");
+					String colTipo = "TODO";// rs.getString("tipo");
 					int colTipoId = rs.getInt("id_tipo");
-					String colGrado = rs.getString("grado");
+					String colGrado = "TODO";// rs.getString("grado");
 					int colGradoId = rs.getInt("id_grado");
-					int colCopias = rs.getInt("id_copias");
+					int colCopias = rs.getInt("copias");
 
 					c.setId(colId);
 					c.setNumero_id(colNumero_id);

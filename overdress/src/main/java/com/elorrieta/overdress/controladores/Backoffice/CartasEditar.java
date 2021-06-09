@@ -13,6 +13,7 @@ import com.elorrieta.overdress.modelo.Coleccion;
 import com.elorrieta.overdress.modelo.Grado;
 import com.elorrieta.overdress.modelo.Tipo;
 import com.elorrieta.overdress.modelo.dao.CartaDAO;
+import com.elorrieta.overdress.modelo.dao.TipoDAO;
 
 /**
  * Servlet implementation class ParticipantesEditar
@@ -39,6 +40,8 @@ public class CartasEditar extends HttpServlet {
 		}
 
 		request.setAttribute("titulo", titulo);
+		request.setAttribute("tipos", TipoDAO.getAll());
+		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
 
@@ -53,11 +56,11 @@ public class CartasEditar extends HttpServlet {
 
 		// recoger parametro del formulario
 		int id = Integer.parseInt(request.getParameter("id"));
-		String numero_id = request.getParameter("numero_id");
+		String numero_id = request.getParameter("numeroId");
 		String nombre = request.getParameter("nombre");
-		int idcoleccion = Integer.parseInt("idcoleccion");
-		int idtipo = Integer.parseInt("idtipo");
-		int idgrado = Integer.parseInt(request.getParameter("idgrado"));
+		int idcoleccion = Integer.parseInt(request.getParameter("coleccion"));
+		int idtipo = Integer.parseInt(request.getParameter("tipo"));
+		int idgrado = Integer.parseInt(request.getParameter("grado"));
 		int copias = Integer.parseInt(request.getParameter("copias"));
 
 		// creamos POJO de Carta con los datos del formulario
@@ -98,6 +101,8 @@ public class CartasEditar extends HttpServlet {
 		}
 
 		request.setAttribute("titulo", "Modificar Carta");
+		request.setAttribute("tipos", TipoDAO.getAll());
+		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
 

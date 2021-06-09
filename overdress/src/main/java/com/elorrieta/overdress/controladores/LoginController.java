@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 
 		if (usuario != null) {
 			mensaje = "Ongi Etorri";
-			vista = "cartas-listar"; // nombre del controlador, no quiero ir a la JSP
+			vista = "backoffice/cartas-listar"; // nombre del controlador, no quiero ir a la JSP
 
 			// guardar el usuario en session para el filtro
 			HttpSession session = request.getSession();

@@ -13,7 +13,8 @@
                 <input type="text" 
                        name="nombre" 
                        id="nombre"
-                       required 
+                       required
+                       value="admin"
                        autofocus 
                        class="form-control" 
                        placeholder="Nombre o Nick">
@@ -22,7 +23,8 @@
                 <input type="password" 
                        name="contraseina" 
                        id="contraseina"
-                       required 
+                       required
+                       value="admin" 
                        class="form-control" 
                        placeholder="Mínimo 4 Máximo 8" >
 
