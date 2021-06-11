@@ -45,7 +45,6 @@ public class CartasEditar extends HttpServlet {
 		request.setAttribute("tipos", TipoDAO.getAll());
 		request.setAttribute("colecciones", ColeccionDAO.getAll());
 		request.setAttribute("grados", GradoDAO.getAll());
-		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
 
@@ -108,7 +107,6 @@ public class CartasEditar extends HttpServlet {
 		request.setAttribute("tipos", TipoDAO.getAll());
 		request.setAttribute("colecciones", ColeccionDAO.getAll());
 		request.setAttribute("grados", GradoDAO.getAll());
-		// TODO lo mismo para Colecciones y Grados
 		request.setAttribute("carta", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
 

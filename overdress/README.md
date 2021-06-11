@@ -55,13 +55,13 @@ Si queremos entrar a los paneles de Administración deberemos *Iniciar Sesión*.
 
 ## Estructura Clases del proyecto
 
-Interesante consultar la documentacion [JavaDoc API](https://github.com/ipartek/supermercado-java/tree/master/src/main/webapp/doc) la cual esta accesible una vez ejecuitado el proyecto en la propia barra de navegación.
+
 
 Intersante mirar los siguientes packages de java:
 
-- **com.ipartek.formacion.listenner** Listener que se ejecuta al arrancar la APP
-- **com.ipartek.formacion.controller.backoffice** Controladores para el usuario administrador
-- **com.ipartek.formacion.controller.frontoffice** Controladores para el usuario normal
-- **com.ipartek.formacion.modelo.pojo** Pojos o Clases para crear Objetos e java
-- **com.ipartek.formacion.modelo.dao** DAO para relacionar los Pojos de Java con las tablas dela BBDD
-- **com.ipartek.formacion.seguridad** Filtros de seguridad
+- 
+- **com.elorrieta.overdress.controller.backoffice** Controladores para el usuario administrador
+- **com.elorrieta.overdress.controller.frontoffice** Controladores para el usuario normal
+- **com.elorrieta.overdress.modelo.** Pojos o Clases para crear Objetos e java
+- **com.elorrieta.overdress.modelo.dao** DAO para relacionar los Pojos de Java con las tablas dela BBDD
+- **com.elorrieta.overdress.backoffice** Filtros de seguridad

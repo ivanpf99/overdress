@@ -33,7 +33,7 @@
 	         </li>
 	         <li class="nav-item">
 	           <a class="nav-link ${ (param.page eq 'formulario') ? 'active' : '' }" 
-	              href="backoffice/cartas-editar">Crear Carta</a>
+	              href="backoffice/cartas-editar?id=0">Crear Carta</a>
 	         </li>
 	         
          </c:if>
