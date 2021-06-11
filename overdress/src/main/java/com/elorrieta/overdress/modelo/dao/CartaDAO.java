@@ -46,6 +46,8 @@ public class CartaDAO {
 
 		) {
 
+			System.out.println(pst);
+
 			while (rs.next()) { // itero sobre los resultados de la consulta SQL
 
 				Carta c = mapper(rs);
